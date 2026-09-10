@@ -7,7 +7,7 @@ public class UserProfile {
     private final int age;
     private final boolean isPremium;
 
-    // Теперь принимает интерфейс UserProfileBuilderImpl (или просто используем поля напрямую)
+    
     UserProfile(UserProfileBuilderImpl builder) {
         this.username = builder.username;
         this.email = builder.email;
