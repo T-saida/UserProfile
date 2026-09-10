@@ -1,15 +1,15 @@
 package org.example;
 
-public class UserProfileBuilderImpl implements UserProfileBuilder {
+public class AdminProfileBuilder implements UserProfileBuilder {
     String username;
     String email;
-    String phone = "Not specified";
-    int age = 0;
-    boolean isPremium = false;
+    String phone = "Admin Hotline";
+    int age = 25;
+    boolean isPremium = true;
 
     @Override
     public UserProfileBuilder setUsername(String username) {
-        this.username = username;
+        this.username = "ADMIN_" + username;
         return this;
     }
 
@@ -33,18 +33,21 @@ public class UserProfileBuilderImpl implements UserProfileBuilder {
 
     @Override
     public UserProfileBuilder setPremium(boolean isPremium) {
-        this.isPremium = isPremium;
+        this.isPremium = true;
         return this;
     }
 
     @Override
     public UserProfile build() {
-        if (username == null || username.trim().isEmpty()) {
-            throw new IllegalStateException("Username cannot be empty");
+        if (username == null) {
+            throw new IllegalStateException("Admin username required");
         }
-        if (email == null || !email.contains("@")) {
-            throw new IllegalStateException("Invalid email address");
-        }
-        return new UserProfile(this);
+        UserProfileBuilderImpl builder = new UserProfileBuilderImpl();
+        builder.setUsername(this.username);
+        builder.setEmail(this.email);
+        builder.setPhone(this.phone);
+        builder.setAge(this.age);
+        builder.setPremium(this.isPremium);
+        return new UserProfile(builder);
     }
 }
